@@ -21,7 +21,21 @@ This one is a doozy! We might want to start by creating a helper function called
 */
 
 const chooseRecipe = function (bakeryA, bakeryB, recipes) {
-  // Code here!
+  for (const recipe of recipes) {
+    let hasIngredientA = false;
+    let hasIngredientB = false;
+    for (const ingredient of recipe.ingredients) {
+      if (bakeryA.includes(ingredient)) {
+        hasIngredientA = true;
+      }
+      if (bakeryB.includes(ingredient)) {
+        hasIngredientB = true;
+      }
+    }
+    if (hasIngredientA && hasIngredientB) {
+      return recipe.name;
+    }
+  }
 };
 
 let bakeryA = ["saffron", "eggs", "tomato paste", "coconut", "custard"];
