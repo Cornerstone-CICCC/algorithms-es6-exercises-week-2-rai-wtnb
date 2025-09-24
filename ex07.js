@@ -9,7 +9,18 @@ Not sure where to get started? It might be useful to start by creating a variabl
 */
 
 const checkAir = function (samples, threshold) {
-  // Code here!
+  const dirtySamples = samples.reduce(function (count, sample) {
+    if (sample === "dirty") {
+      return count + 1;
+    }
+    return count;
+  }, 0);
+
+  if (dirtySamples / samples.length > threshold) {
+    return "Polluted";
+  } else {
+    return "Clean";
+  }
 };
 
 console.log(
