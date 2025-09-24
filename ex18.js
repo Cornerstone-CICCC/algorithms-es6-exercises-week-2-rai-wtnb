@@ -23,7 +23,16 @@ Create a function named squareCode that will receive a message, and return the s
 */
 
 const squareCode = function (message) {
-  // Put your solution here
+  const noSpaces = message.replace(/ /g, "");
+  const columns = Math.ceil(Math.sqrt(noSpaces.length));
+  let encoded = "";
+  for (let i = 0; i < columns; i++) {
+    for (let j = i; j < noSpaces.length; j += columns) {
+      encoded += noSpaces[j];
+    }
+    encoded += " ";
+  }
+  return encoded.trim();
 };
 
 console.log(squareCode("chill out")); // clu hlt io
