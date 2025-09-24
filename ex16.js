@@ -16,7 +16,77 @@ For more information on casing styles, read Wikipedia's Special Case Styles for 
 */
 
 const makeCaze = function (input, caze) {
-  // Put your solution here
+  if (!Array.isArray(caze)) {
+    caze = [caze];
+  }
+  let output = input;
+  const precedence = [
+    "camel",
+    "pascal",
+    "snake",
+    "kebab",
+    "title",
+    "vowel",
+    "consonant",
+    "upper",
+    "lower",
+  ];
+  caze.sort((a, b) => precedence.indexOf(a) - precedence.indexOf(b));
+  for (const style of caze) {
+    switch (style) {
+      case "camel":
+        output = output
+          .split(" ")
+          .map((word, i) =>
+            i === 0 ? word : word[0].toUpperCase() + word.slice(1)
+          )
+          .join("");
+        break;
+      case "pascal":
+        output = output
+          .split(" ")
+          .map((word) => word[0].toUpperCase() + word.slice(1))
+          .join("");
+        break;
+      case "snake":
+        output = output.split(" ").join("_");
+        break;
+      case "kebab":
+        output = output.split(" ").join("-");
+        break;
+      case "title":
+        output = output
+          .split(" ")
+          .map((word) => word[0].toUpperCase() + word.slice(1))
+          .join(" ");
+        break;
+      case "vowel":
+        output = output
+          .split("")
+          .map((char) =>
+            ["a", "e", "i", "o", "u"].includes(char) ? char.toUpperCase() : char
+          )
+          .join("");
+        break;
+      case "consonant":
+        output = output
+          .split("")
+          .map((char) =>
+            !["a", "e", "i", "o", "u"].includes(char)
+              ? char.toUpperCase()
+              : char
+          )
+          .join("");
+        break;
+      case "upper":
+        output = output.toUpperCase();
+        break;
+      case "lower":
+        output = output.toLowerCase();
+        break;
+    }
+  }
+  return output;
 };
 
 console.log(makeCaze("this is a string", "camel")); // thisIsAString
